@@ -1,25 +1,49 @@
-# volta.guide
+# Starlight Starter Kit: Basics
 
-Repo per il leggendario sito che ci farà fullare le ioi
+[![Built with Starlight](https://astro.badg.es/v2/built-with-starlight/tiny.svg)](https://starlight.astro.build)
 
+```
+npm create astro@latest -- --template starlight
+```
 
-## avviso
-se volete aggiungere qualcosa fate pr (dovete forkare la repo)
+> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
 
-## appunti random
+## 🚀 Project Structure
 
-Io farei una struttura del genere:
-### Home
-Ci metterei anche tipo il problema della settimana/aggiornamenti su nuovi problemi aggiunti
+Inside of your Astro + Starlight project, you'll see the following folders and files:
 
-### Introduzione
-Per spiegare cos'è olinfo e come funzionano le vari fasi
+```
+.
+├── public/
+├── src/
+│   ├── assets/
+│   ├── content/
+│   │   └── docs/
+│   └── content.config.ts
+├── astro.config.mjs
+├── package.json
+└── tsconfig.json
+```
 
-### Risorse
-Per risorse generali (tipo book e cp algo)
+Starlight looks for `.md` or `.mdx` files in the `src/content/docs/` directory. Each file is exposed as a route based on its file name.
 
-### Algobadge
-Per hint a problemi di algobadge e tipo per spiegare un po' anche la teoria che serve (tipo bo' per grafi dire che serve bfs dfs dijkstra)
+Images can be added to `src/assets/` and embedded in Markdown with a relative link.
 
-### Problemi
-Altre soluzioni/hint a problemi di training divisi per argomento
+Static assets, like favicons, can be placed in the `public/` directory.
+
+## 🧞 Commands
+
+All commands are run from the root of the project, from a terminal:
+
+| Command                   | Action                                           |
+| :------------------------ | :----------------------------------------------- |
+| `npm install`             | Installs dependencies                            |
+| `npm run dev`             | Starts local dev server at `localhost:4321`      |
+| `npm run build`           | Build your production site to `./dist/`          |
+| `npm run preview`         | Preview your build locally, before deploying     |
+| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
+| `npm run astro -- --help` | Get help using the Astro CLI                     |
+
+## 👀 Want to learn more?
+
+Check out [Starlight’s docs](https://starlight.astro.build/), read [the Astro documentation](https://docs.astro.build), or jump into the [Astro Discord server](https://astro.build/chat).
