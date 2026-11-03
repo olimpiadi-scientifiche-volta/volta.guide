@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/679a2bab-7728-48ac-9959-c6067d748c52/deploy-status)](https://app.netlify.com/projects/volta-guide/deploys)
+
 # Starlight Starter Kit: Basics
 
 [![Built with Starlight](https://astro.badg.es/v2/built-with-starlight/tiny.svg)](https://starlight.astro.build)

@@ -1,0 +1,48 @@
+---
+title: Greedy
+
+sidebar:
+  order: 3
+---
+
+import { LinkCard } from '@astrojs/starlight/components';
+
+
+[...]
+
+
+## Contest Manager Simulator
+<LinkCard title="sortilegio_cms" href="https://training.olinfo.it/task/sortilegio_cms" />
+
+<details>
+<summary>Soluzione</summary>
+
+[...]
+
+```cpp
+vector<pair<int, int>> stila(int N, int M, int Q, vector<int> C, vector<int> T, vector<int> S) {
+    vector<pair<int, int>> R(N);
+
+    R[0] = {0, 300};
+
+    R[1].first = 1;
+    R[1].second = 173;
+
+    return R;
+}
+```
+
+</details>
+
+
+## Altri problemi
+- [pre-egoi-gelato](https://training.olinfo.it/task/pre-egoi-gelato)
+- [ois_interrogazioni](https://training.olinfo.it/task/ois_interrogazioni)
+- [ioit_dreamteam](https://training.olinfo.it/task/ioit_dreamteam)
+- [ois_money](https://training.olinfo.it/task/ois_money)
+
+
+## Altre risorse
+- [Chapter 6 - book.pdf](https://cses.fi/book/book.pdf#chapter.6)
+- [Introduction to Greedy Algorithms - USACO Guide](https://usaco.guide/bronze/intro-greedy?lang=cpp)
+

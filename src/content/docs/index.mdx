@@ -1,40 +1,41 @@
 ---
-title: Welcome to Starlight
-description: Get started building your docs site with Starlight.
-template: splash # Remove or comment out this line to display the site sidebar on this page.
+title: Home
+# description: Get started building your docs site with Starlight.
+tableOfContents: false
+
 hero:
-  tagline: Congrats on setting up a new Starlight project!
+  title: Volta Guide
+  tagline: Fork di nik-din/volta.guide 
   image:
-    file: ../../assets/houston.webp
+    file: ../../../public/my-logo.png
   actions:
-    - text: Example Guide
-      link: /guides/example/
+    - text: Inizia subito!
+      link: /act-1/syntax/
       icon: right-arrow
-    - text: Read the Starlight docs
-      link: https://starlight.astro.build
+    - text: nik-din/volta.guide
+      link: https://github.com/nik-din/volta.guide
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+import { Steps } from '@astrojs/starlight/components';
 
-## Next steps
 
-<CardGrid stagger>
-	<Card title="Update content" icon="pencil">
-		Edit `src/content/docs/index.mdx` to see this page change.
-	</Card>
-	<Card title="Change page layout" icon="document">
-		Delete `template: splash` in `src/content/docs/index.mdx` to display a
-		sidebar on this page.
-	</Card>
-	<Card title="Add new content" icon="add-document">
-		Add Markdown or MDX files to `src/content/docs` to create new pages.
-	</Card>
-	<Card title="Configure your site" icon="setting">
-		Edit your `sidebar` and other config in `astro.config.mjs`.
-	</Card>
-	<Card title="Read the docs" icon="open-book">
-		Learn more in [the Starlight Docs](https://starlight.astro.build/).
-	</Card>
-</CardGrid>
+## Non sai cosa fare?
+<Steps>
+
+0. **Tutorial**: la selezione scolastica è la prima fase delle Olimpiadi di Informatica e consiste in problemi di logica. Preparati [qui](https://training.olinfo.it/scolastiche)! 
+
+1. **Act 1**: adesso è il momento di prepararsi alla fase territoriale (e nazionale)! In questa sezione trovi tutto il programma della prima parte dell'anno: dalle basi di C++ ad argomenti più complessi. 
+
+2. **Act 2**: ti stai preparando per stage e gare internazionali? Qui trovi alcune delle tecniche più comuni che sono state spiegate nella seconda parte dell'anno. 
+
+3. **Act 3**: per i più temerari, ecco una raccolta di problemi e algoritmi avanzati! 
+
+</Steps>
+
+_Quando esce [Sea of Sorrow](https://store.steampowered.com/news/app/1030300/view/554635692378948961)?_
+
+
+## Dai il tuo contributo!
+Contattaci per segnalare bug o errori, in privato o direttamente su GitHub. 
