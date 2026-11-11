@@ -1,22 +1,21 @@
 {
-  "name": "volta.guide",
-  "version": "0.0.1",
-  "description": "sito x oli del volta :)",
-  "license": "MIT",
+  "name": "",
   "type": "module",
+  "version": "0.0.1",
   "scripts": {
-    "docs:build": "vuepress build docs",
-    "docs:clean-dev": "vuepress dev docs --clean-cache",
-    "docs:dev": "vuepress dev docs",
-    "docs:update-package": "npx vp-update"
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
   },
-  "devDependencies": {
-    "@vuepress/bundler-vite": "2.0.0-rc.20",
-    "@vuepress/plugin-markdown-math": "^2.0.0-rc.80",
-    "@vuepress/theme-default": "2.0.0-rc.80",
-    "mathjax-full": "^3.2.2",
-    "sass-embedded": "^1.85.1",
-    "vue": "^3.5.13",
-    "vuepress": "2.0.0-rc.20"
+  "dependencies": {
+    "@astrojs/markdown-remark": "^7.3.4",
+    "@astrojs/starlight": "^0.42.6",
+    "astro": "^7.2.10",
+    "katex": "^0.19.0",
+    "rehype-katex": "^7.0.1",
+    "remark-math": "^6.0.0",
+    "sharp": "^0.35.3"
   }
 }

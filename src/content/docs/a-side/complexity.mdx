@@ -1,0 +1,193 @@
+---
+title: Complessità asintotica
+
+sidebar:
+  order: 2
+---
+
+import { LinkCard } from '@astrojs/starlight/components';
+
+
+[Reel esplicativo](https://www.instagram.com/p/Dd_ExP0nMJG/)
+
+[...]
+
+$f(x) \in O(g(x)) \iff \exists c > 0, n_{0} \in \mathbb{N} \mid \forall n > n_{0}, f(x) \leq c \cdot g(x)$
+
+
+## Binary Exponentiation
+[...]
+
+```cpp
+int exp(int b, int e) {
+	if (e == 0) {
+		return 1;
+	}
+	
+	int x = exp(b, e / 2);
+
+	if (e % 2 == 0) {
+		return x * x;
+	}
+	if (e % 2 == 1) {
+		return x * x * b;
+	}
+}
+```
+
+
+## Merge Sort
+[...]
+
+
+## Trova la somma pari massima v2.0
+<LinkCard title="easy3" href="https://training.olinfo.it/task/easy3" />
+
+<details>
+<summary>Soluzione parziale</summary>
+Una prima idea potrebbe essere quella di controllare esplicitamente tutte le coppie. Tuttavia la complessità di questa soluzione è $O(N^{2})$ e con $N \leq 10^{5}$ non è abbastanza. In molti problemi è possibile ottenere alcuni punti anche con soluzioni parziali (e.g. soluzioni troppo lente o che risolvono solo una parte del problema), quindi è molto importante controllare sempre la sezione _Subtask_.
+
+```cpp
+int main() {
+	int N;
+	cin >> N;
+
+	vector<int> S(N);
+
+	for (int i = 0; i < N; i++) {
+		cin >> S[i];
+	}
+
+	int ans = -1;
+
+	for (int i = 0; i < N; i++) {
+		for (int j = 0; j < N; j++) {
+			if (i == j) 
+				continue;
+
+			if ((S[i] + S[j]) % 2 == 0) 
+				ans = max(ans, S[i] + S[j]);
+		}
+	}
+
+	cout << ans << '\n';
+}
+```
+</details>
+
+<details>
+<summary>Soluzione</summary>
+
+[...]
+
+```cpp
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main() {
+	int N; 
+	cin >> N;
+
+	vector<int> S(N); 
+	for (int i = 0; i < N; i++) {
+		cin >> S[i];
+	}
+
+	int pari1 = -1, pari2 = -1;
+	int dispari1 = -1, dispari2 = -1;
+
+	for (int i = 0; i < N; i++) {
+		if (S[i] % 2 == 0) {
+			if (S[i] > pari1) {
+				pari2 = pari1;
+				pari1 = S[i];
+			}
+			else if (S[i] > pari2) {
+				pari2 = S[i];
+			}
+		}
+		if (S[i] % 2 == 1) {
+			if (S[i] > dispari1) {
+				dispari2 = dispari1;
+				dispari1 = S[i];
+			}
+			else if (S[i] > dispari2) {
+				dispari2 = S[i];
+			}
+		}
+	}
+
+	if (pari2 == -1 && dispari2 == -1) {
+		cout << -1 << '\n';
+	}
+	else if (pari2 == -1) {
+		cout << dispari1 + dispari2 << '\n';
+	}
+	else if (dispari2 == -1) {
+		cout << pari1 + pari2 << '\n';
+	}
+	else {
+		cout << max(pari1 + pari2, dispari1 + dispari2) << '\n';
+	}
+}
+```
+</details>
+
+
+## Guess The Sign
+<LinkCard title="ois_sign" href="https://training.olinfo.it/task/ois_sign" />
+
+<details>
+<summary>Soluzione parziale</summary>
+
+[...]
+</details>
+
+<details>
+<summary>Soluzione</summary>
+
+```cpp
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main() {
+	freopen("input.txt", "r", stdin);
+	freopen("output.txt", "w", stdout);
+
+	int T;
+	cin >> T;
+
+	for (int t = 0; t < T; t++) {
+		long long A, B;
+		cin >> A >> B;
+
+		char ans = '$';
+
+		if (A > 0) {
+			ans = '+';
+		}
+		else if (A <= 0 && B >= 0) {
+			ans = '0';
+		}
+		else {
+			if ((B - A + 1) % 2 == 0) {
+				ans = '+';
+			}
+			if ((B - A + 1) % 2 == 1) {
+				ans = '-';
+			}
+		}
+
+		cout << ans << '\n';
+	}
+}
+```
+</details>
+
+
+## Altre risorse
+- [Complessità computazionale - Guida alle OII](https://guida.oii.anpc.it/chapters/1_terry/complexity.html)
+- [Chapter 2 - book.pdf](https://cses.fi/book/book.pdf#chapter.2)
+- [Time Complexity - USACO Guide](https://usaco.guide/bronze/time-comp)

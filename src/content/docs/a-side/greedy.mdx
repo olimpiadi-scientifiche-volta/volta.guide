@@ -1,0 +1,118 @@
+---
+title: Greedy
+
+sidebar:
+  order: 3
+---
+
+import { LinkCard } from '@astrojs/starlight/components';
+
+
+Il termine _greedy_ non indica un algoritmo in particolare ma una categoria di problemi in cui la soluzione consiste semplicemente nel fare sempre la scelta che sembra migliore al momento. 
+
+
+## Interrogazioni equilibrate
+<LinkCard title="ois_interrogazioni" href="https://training.olinfo.it/task/ois_interrogazioni" />
+
+<details>
+<summary>Soluzione</summary>
+
+[...]
+</details>
+
+
+## DreamTeam Selection
+<LinkCard title="ioit_dreamteam" href="https://training.olinfo.it/task/ioit_dreamteam" />
+
+<details>
+<summary>Hint 1</summary>
+
+Sapresti risolvere il problema se l'abilità di uno studente non dipende dai suoi compagni di squadra?
+</details>
+
+<details>
+<summary>Hint 2</summary>
+
+In ogni coppia di amici, quale dei due ci conviene sempre scegliere per primo?
+</details>
+
+<details>
+<summary>Hint 3</summary>
+
+Preso il primo amico, che impatto avrebbe sul punteggio della squadra scegliere anche il suo migliore amico?
+</details>
+
+<details>
+<summary>Soluzione</summary>
+
+Per ogni coppia di amici conviene prendere per primo l'amico con $P[i]$ maggiore. Aggiungere il suo migliore amico alla squadra ha un impatto sul punteggio del team pari a $Q[i] + Q[F[i]] - P[i]$.
+
+Se il problema non avesse la limitazione dei migliori amici, ci basterrebbe sortare $P$ in ordine decrescente e sommare i primi $K$ valori. Con le osservazioni che abbiamo fatto notiamo che per ogni coppia di amici basta aggiungere ad un vettore $max(P[i], P[F[i]])$ e $Q[i] + Q[F[i]] - max(P[i], P[F[i]])$, sortarlo in ordine decrescente e sommare i primi $K$ valori.
+
+N.B. nella soluzione che è allegata qui ```if (i < F[i])``` serve ad accertarsi che considereremo ogni coppia una sola volta e per sortare il vettore in ordine decrescente usiamo una [lambda](https://www.w3schools.com/cpp/cpp_functions_lambda.asp) (ci sono anche altri modi di sortare in ordine decrescente ma la lambda è più versatile e permette di utilizzare anche funzioni più complesse)
+
+```cpp
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int select(int N, int K, vector<int> F, vector<int> P, vector<int> Q) {
+    vector<int> A;
+    for (int i = 0; i < N; i++) {
+        if (i < F[i]) {
+            int C = max(P[i], P[F[i]]);
+            A.push_back(C);
+            A.push_back(Q[i] + Q[F[i]] - C);
+        }
+    }
+
+    sort(begin(A), end(A), [&] (int i, int j) {
+        return i > j;
+    });
+
+    int X = 0;
+    for (int i = 0; i < K; i++) {
+        X += A[i];
+    }
+
+    return X;
+}
+
+int main() {
+    int N, K; cin >> N >> K;
+
+    vector<int> F(N), P(N), Q(N);
+    for (int i = 0; i < N; i++) {
+        cin >> F[i] >> P[i] >> Q[i];
+    }
+
+    cout << select(N, K, F, P, Q) << '\n';
+
+    return 0;
+}
+```
+</details>
+
+
+## Splitting the Bill
+<LinkCard title="ois_money" href="https://training.olinfo.it/task/ois_money" />
+
+<details>
+<summary>Soluzione</summary>
+
+[...]
+</details>
+
+
+## Altri problemi
+- [pre-egoi-gelato](https://training.olinfo.it/task/pre-egoi-gelato)
+- [ois_taxi](https://training.olinfo.it/task/ois_taxi)
+- [oii_bufale](https://training.olinfo.it/task/oii_bufale)
+- [sortilegio_cms](https://training.olinfo.it/task/sortilegio_cms)
+
+
+## Altre risorse
+- [Problemi greedy - Guida alle OII](https://guida.oii.anpc.it/chapters/1_terry/greedy.html)
+- [Chapter 6 - book.pdf](https://cses.fi/book/book.pdf#chapter.6)
+- [Introduction to Greedy Algorithms - USACO Guide](https://usaco.guide/bronze/intro-greedy?lang=cpp)
+- [Greedy Algorithms with Sorting - USACO Guide](https://usaco.guide/silver/greedy-sorting?lang=cpp)

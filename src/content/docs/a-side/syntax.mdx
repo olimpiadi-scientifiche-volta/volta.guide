@@ -1,0 +1,259 @@
+---
+title: Introduzione a C++
+
+sidebar:
+  order: 1
+
+tableOfContents:
+  maxHeadingLevel: 3
+---
+
+import { LinkCard } from '@astrojs/starlight/components';
+
+
+La presentazione che abbiamo usato è disponibile [qui](/Informatica_Base.pdf). 
+
+[Questa](https://en.cppreference.com/) è la documentazione ufficiale, può sembrare difficile da usare ma in gara sarà l'unica risorsa che avrete a disposizione.
+
+## Come eseguire codice in C++?
+Il modo più semplice è usare piattaforme come [questa](https://editor.olinfo.it/) o [anche questa](https://ide.usaco.guide/). 
+
+In alternativa potete usare IDE come [Visual Studio Code](https://code.visualstudio.com/).
+
+<details>
+<summary>Linux</summary>
+
+[Using C++ on Linux in VS Code](https://code.visualstudio.com/docs/cpp/config-linux)
+</details>
+
+<details>
+<summary>Windows</summary>
+
+1. [Windows Subsystem for Linux](https://learn.microsoft.com/en-us/windows/wsl/install); [Using C++ and WSL in VS Code](https://code.visualstudio.com/docs/cpp/config-wsl)
+2. [MinGW](https://code.visualstudio.com/docs/cpp/config-mingw)
+</details>
+
+<details>
+<summary>MacOS</summary>
+
+[Using Clang in Visual Studio Code](https://code.visualstudio.com/docs/cpp/config-clang-mac)
+</details>
+
+Se siete dei veri _larper_ [Neovim](https://neovim.io/) è sicuramente molto carino, [qui](https://github.com/ciao-gio/dotfiles) potete trovare i miei dotfiles.
+
+```sh
+g++ problema.cpp -o problema -Wall -Wextra -g -Og -fsanitize=address,undefined
+./problema < input.txt > output.txt
+```
+
+
+## Variabili
+Possiamo immaginare una variabile come una scatola con un'etichetta: il nome è scritto sull'etichetta e dentro la scatola c'è il valore. In C++, a differenza di altri linguaggi come Python, ogni variabile ha anche un tipo immutabile che rappresenta il tipo di oggetti che la scatola può contenere. In generale la sintassi è: ```tipo NOME = VALORE;```.
+
+### Booleani
+Si indicano con la keyword ```bool``` e possono assumere solo due valori: ```true``` o ```false```. Ad esempio: 
+```cpp 
+bool flag = true;
+```
+
+### Interi
+Si indicano con la keyword ```int``` e si usano per rappresentare dei numeri compresi tra $-2^{31}$ e $2^{31} - 1$. Se usate la keyword ```long long``` potete rappresentare numeri compresi tra $-2^{63}$ e $2^{63} - 1$. Ad esempio:
+```cpp
+int martino = 42;
+long long casadei = 676767677;
+```
+
+<details>
+<summary>Perché proprio questi numeri?</summary>
+
+Un numero non è altro che una [sequenza binaria](https://it.wikipedia.org/wiki/Sistema_numerico_binario) e ogni cifra è un bit (binary digit) e un gruppo di 8 bit si chiama byte. Un ```long long``` occupa 8 byte e in 64 bit possiamo rappresentare numeri fino a $2^{63}$, mentre un ```int``` occupa solo 4 byte e ha 32 bit per rappresentare numeri fino a $2^{31}$. Un bit viene usato per indicare il segno e aggiungendo la keyword ```unsigned``` possiamo rappresentare il doppio dei numeri.  
+</details>
+
+#### Operazioni
+[Qui](https://en.cppreference.com/cpp/language/operator_precedence) trovate la priorità di ogni operazione, per modificare l'ordine di un'espressione potete usare le parentesi tonde. Le principali operazioni sono:
+- ```a + b```, eventualmente potete usare anche ```a++``` che aggiunge 1
+- ```a - b```, eventualmente potete usare anche ```a--``` che sottrae 1
+- ```a * b``` per moltiplicare due interi
+- ```a / b```, nota che la divisione tra interi sarà un numero intero (i.e. il risultato viene arrotondato per difetto)
+- ```a % b``` per trovare il resto della divisione (intera) tra due interi
+
+**Attenzione**: scrivere solo ```a + b``` non modifica il valore di nessuna variabile, per assegnare a una variabile il risultato di un'espressione dobbiamo scrivere ad esempio ```a = a + b```.
+
+### Vettori
+Un vettore è una lista di elementi **dinamica** (i.e. la sua grandezza può cambiare), tutti dello stesso tipo. Si usa la keyword ```vector``` e si indica il tipo degli elementi tra parentesi angolari. Tra parentesi tonde possiamo indicare il numero di elementi e il loro valore iniziale. Per accedere a un elemento in una determinata posizione possiamo indicare l'indice tra parentesi quadre. Ad esempio:
+```cpp
+vector<bool> michele;
+vector<int> trapani(6, 7); // trapani = {7, 7, 7, 7, 7, 7} 
+trapani[4] = 2;
+```
+
+#### Metodi
+I metodi sono funzioni dichiarate direttamente all'interno di una struttura dati. Per accedere a un metodo si usa il nome della struttura dati seguito da un punto e dal nome della funzione. I principali sono:
+- ```empty()``` ritorna _true_ se il vettore è vuoto, _false_ altrimenti
+- ```size()``` ritorna il numero di elementi contenuti nel vettore
+- ```clear()``` "svuota" il vettore
+- ```push_back(x)``` aggiunge l'elemento _x_ in fondo al vettore
+- ```pop_back()``` rimuove l'ultimo elemento
+
+#### Sort
+Per _sortare_ (i.e. ordinare) un intervallo di elementi, potete usare la funzione ```sort(first, last, comp)```. ```first``` e ```last``` sono [iteratori](https://www.w3schools.com/cpp/cpp_iterators.asp), e definiscono il range [first, last) di elementi da ordinare. ```comp``` è un parametro opzionale ed è la funzione usata per confrontare due elementi. Il modo migliore è usare una [lambda](#lambda). 
+```cpp
+sort(begin(trapani), end(trapani));
+```
+
+### Stringhe e caratteri
+I caratteri corrispondono alle keyword ```char``` e sono in realtà degli interi a 7 bit. In teoria è possibili quindi fare le stesse operazioni che facciamo con gli interi, anche se in pratica non ricordo l'ultima volta in cui ho moltiplicato due caratteri. Numeri e caratteri sono associati secondo [questa tabella](https://en.cppreference.com/cpp/language/ascii).
+
+Le stringhe invece corrispondono alla keyword ```string``` e si comportano proprio come un vettore di caratteri. Ecco alcuni esempi:
+```cpp
+string A = "pietro";
+string B = "picchi";
+A[0] = 80;
+B[0] = 'P';
+string C = A + ' ' + C; // "pietro Picchi";
+int X = C[1] - 96; // 8 ('i' è l'ottava lettera dell'alfabeto)
+int Y = C[7] - 64; // 16 ('P' è la sedicesima lettera dell'alfabeto)
+```
+_Nota_: per le stringhe si devono usare le virgolette doppie, mentre per i caratteri bastano le virgolette singole
+
+## Condizioni
+Per eseguire un determinato blocco di codice solo in alcuni casi, si può usare la seguente struttura:
+```cpp
+if (flag1) {
+	// ...
+}
+else if (flag2) {
+	// ...
+}
+else if (flag3) {
+	// ...
+}
+else {
+	// ...
+}
+```
+
+Qui ```flag0```, ```flag1``` e ```flag2``` sono delle espressioni booleane (e.g. ```x % 2 == 0```, ```x < y```, ...). La struttura è abbastanza intuitiva: deve iniziare con l'unico blocco ```if (flag1) {...}``` e può finire con l'unico blocco ```else {...}```, mentre potete usare quanti ```else if``` volete.    
+
+## Input e output
+[...]
+
+
+## Trova la parità
+<LinkCard title="pari" href="https://training.olinfo.it/task/pari" />
+
+<details>
+<summary>Soluzione</summary>
+```cpp
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main() {
+	int N;
+	cin >> N;
+
+	if (N % 2 == 0) {
+		cout << "pari";
+	}
+	else {
+		cout << "dispari";
+	}
+}
+```
+</details>
+
+
+## Cicli
+[...]
+
+### For 
+[...]
+
+### While
+[...]
+
+
+## Trova il massimo
+<LinkCard title="easy1" href="https://training.olinfo.it/task/easy1" />
+
+<details>
+<summary>Soluzione</summary>
+```cpp
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main() {
+	int N;
+	cin >> N;
+
+	vector<int> V(N);
+
+	for (int i = 0; i < N; i++) {
+		cin >> V[i];
+	}
+
+	int ans = -1e3;
+
+	for (int i = 0; i < N; i++) {
+		if (V[i] > ans) {
+			ans = V[i];
+		}
+	}
+
+	cout << ans << "\n";
+}
+```
+</details>
+
+
+## Funzioni
+[...]
+
+### Lambda
+[...]
+
+
+## Trova la somma pari massima
+<LinkCard title="easy2" href="https://training.olinfo.it/task/easy2" />
+
+<details>
+<summary>Soluzione</summary>
+```cpp
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main() {
+	int N;
+	cin >> N;
+
+	vector<int> A(N), B(N);
+	
+	for (int i = 0; i < N; i++) {
+		cin >> A[i] >> B[i];
+	}
+
+	int ans = -1;
+
+	for (int i = 0; i < N; i++) {
+		if ((A[i] + B[i]) % 2 == 0) {
+			ans = max(ans, A[i] + B[i]);
+		}
+	}
+
+	cout << ans << '\n';
+}
+```
+</details>
+
+
+## Altri problemi
+- [ois_biglietti](https://training.olinfo.it/task/ois_biglietti)
+- [ois_time](https://training.olinfo.it/task/ois_time)
+
+
+## Altre risorse
+- [C++ Tutorial](https://www.w3schools.com/cpp/)
+- [Introduzione a C++ - Guida alle OII](https://guida.oii.anpc.it/chapters/0_introduzione/cpp_basics.html)
