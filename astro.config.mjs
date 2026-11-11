@@ -28,16 +28,16 @@ export default defineConfig({
 			],
 			sidebar: [
 				{
-					label: 'Act 1',
-					items: [{ autogenerate: { directory: 'act-1' } }],
+					label: 'A-Side',
+					items: [{ autogenerate: { directory: 'a-side' } }],
 				},
 				{
-					label: 'Act 2',
-					items: [{ autogenerate: { directory: 'act-2' } }],
+					label: 'B-Side',
+					items: [{ autogenerate: { directory: 'b-side' } }],
 				},
 				{
-					label: 'Act 3',
-					items: [{ autogenerate: { directory: 'act-3' } }],
+					label: 'C-Side',
+					items: [{ autogenerate: { directory: 'c-side' } }],
 				},
 				{
 					label: 'Algobadge',
@@ -45,7 +45,7 @@ export default defineConfig({
 					items: [{ autogenerate: { directory: 'algobadge' } }],
 				},
 				{
-					label: 'Extra',
+					label: 'DLC',
 					collapsed: true,
 					items: [
 						{ label: 'Volta Guide', link: 'https://olivolta.netlify.app/', badge: { text: 'Old', variant: 'caution' } },

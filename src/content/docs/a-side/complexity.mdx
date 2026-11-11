@@ -10,10 +10,14 @@ import { LinkCard } from '@astrojs/starlight/components';
 
 [Reel esplicativo](https://www.instagram.com/p/Dd_ExP0nMJG/)
 
+[...]
+
 $f(x) \in O(g(x)) \iff \exists c > 0, n_{0} \in \mathbb{N} \mid \forall n > n_{0}, f(x) \leq c \cdot g(x)$
 
 
 ## Binary Exponentiation
+[...]
+
 ```cpp
 int exp(int b, int e) {
 	if (e == 0) {
@@ -38,6 +42,38 @@ int exp(int b, int e) {
 
 ## Trova la somma pari massima v2.0
 <LinkCard title="easy3" href="https://training.olinfo.it/task/easy3" />
+
+<details>
+<summary>Soluzione parziale</summary>
+Una prima idea potrebbe essere quella di controllare esplicitamente tutte le coppie. Tuttavia la complessità di questa soluzione è $O(N^{2})$ e con $N \leq 10^{5}$ non è abbastanza. In molti problemi è possibile ottenere alcuni punti anche con soluzioni parziali (e.g. soluzioni troppo lente o che risolvono solo una parte del problema), quindi è molto importante controllare sempre la sezione _Subtask_.
+
+```cpp
+int main() {
+	int N;
+	cin >> N;
+
+	vector<int> S(N);
+
+	for (int i = 0; i < N; i++) {
+		cin >> S[i];
+	}
+
+	int ans = -1;
+
+	for (int i = 0; i < N; i++) {
+		for (int j = 0; j < N; j++) {
+			if (i == j) 
+				continue;
+
+			if ((S[i] + S[j]) % 2 == 0) 
+				ans = max(ans, S[i] + S[j]);
+		}
+	}
+
+	cout << ans << '\n';
+}
+```
+</details>
 
 <details>
 <summary>Soluzione</summary>
@@ -99,8 +135,56 @@ int main() {
 </details>
 
 
-## Altri problemi
-- [ois_sign](https://training.olinfo.it/task/ois_sign)
+## Guess The Sign
+<LinkCard title="ois_sign" href="https://training.olinfo.it/task/ois_sign" />
+
+<details>
+<summary>Soluzione parziale</summary>
+
+[...]
+</details>
+
+<details>
+<summary>Soluzione</summary>
+
+```cpp
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main() {
+	freopen("input.txt", "r", stdin);
+	freopen("output.txt", "w", stdout);
+
+	int T;
+	cin >> T;
+
+	for (int t = 0; t < T; t++) {
+		long long A, B;
+		cin >> A >> B;
+
+		char ans = '$';
+
+		if (A > 0) {
+			ans = '+';
+		}
+		else if (A <= 0 && B >= 0) {
+			ans = '0';
+		}
+		else {
+			if ((B - A + 1) % 2 == 0) {
+				ans = '+';
+			}
+			if ((B - A + 1) % 2 == 1) {
+				ans = '-';
+			}
+		}
+
+		cout << ans << '\n';
+	}
+}
+```
+</details>
 
 
 ## Altre risorse
